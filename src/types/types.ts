@@ -1,5 +1,3 @@
-// --- TYPE DEFINITIONS ---
-// Define interfaces for the main SWAPI resources
 export interface Person {
   name: string;
   height: string;
@@ -61,10 +59,24 @@ export interface Species {
   url: string;
 }
 
-// Generic type for the paged API list response
 export interface ApiListResponse<T> {
   count: number;
   next: string | null;
   previous: string | null;
   results: T[];
 }
+
+export type ResourceType =
+  | 'people'
+  | 'planets'
+  | 'starships'
+  | 'vehicles'
+  | 'species';
+
+export const RESOURCE_TYPES: ResourceType[] = [
+  'people',
+  'planets',
+  'starships',
+  'vehicles',
+  'species',
+];
