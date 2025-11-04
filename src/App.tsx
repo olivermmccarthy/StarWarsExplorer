@@ -15,7 +15,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/:resourceType" element={<ResourceList />} />
-        <Route path="/:resourceDetail" element={<ResourceDetail />} />
+        <Route path="/:resourceType/:id" element={<ResourceDetail />} />
       </Routes>
     </Router>
   );

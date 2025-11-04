@@ -4,10 +4,12 @@ import { useFetchResource } from '../hooks/useFetchResource';
 
 export default function ResourceDetail() {
   const { resourceType, id } = useParams();
+  console.log(resourceType);
+  const strId = id ? String(id) : undefined;
   const navigate = useNavigate();
 
-  const { data, loading, error } = useFetchResource(resourceType, id);
-
+  const { data, loading, error } = useFetchResource(resourceType, strId);
+  console.log(data);
   //Handlers
   const handleBack = () => {
     navigate(`/${resourceType}`);
@@ -33,9 +35,10 @@ export default function ResourceDetail() {
   //Success
   return (
     <>
-      <button onClick={handleBack}></button>
-      <h1>RESOURCE: </h1>
-      <p>{data}</p>
+      <button onClick={handleBack}>Back to {resourceType}</button>
+
+      <h1>{data.name}</h1>
+      <p>{data.birth_year}</p>
     </>
   );
 }
