@@ -21,6 +21,16 @@
 }
 
 /* INTRO */
+.intro-content {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  pointer-events: none;
+}
+
+.intro-content.loaded {
+  opacity: 1;
+  pointer-events: auto;
+}
 #root {
   width: 100%;
   display: flex;
@@ -68,6 +78,9 @@
   text-align: center;
   text-shadow: 0 0 10px rgba(255, 232, 31, 0.7);
   animation: pulse 1s infinite alternate;
+}
+.loader-container > p {
+  text-align: center;
 }
 
 @keyframes pulse {

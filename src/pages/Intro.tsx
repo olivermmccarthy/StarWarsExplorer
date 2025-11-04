@@ -1,12 +1,11 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment, OrbitControls, Stars, useGLTF } from '@react-three/drei';
 import { useNavigate } from 'react-router-dom';
 import { useProgress, Html } from '@react-three/drei';
 
 function Loader() {
-  const { progress } = useProgress(); // Hook to get the loading progress
-
+  const { progress } = useProgress();
   return (
     <Html center>
       <div className="loader-container">
@@ -27,6 +26,21 @@ function StarWarsModel() {
 
 export default function Intro() {
   const navigate = useNavigate();
+  // Get progress for the entire Canvas
+  const { progress } = useProgress();
+
+  const [isModelLoaded, setIsModelLoaded] = useState(false);
+
+  useEffect(() => {
+    // Once progress hits 100%, set the loaded state to true
+    if (progress === 100) {
+      const timer = setTimeout(() => setIsModelLoaded(true), 100);
+      return () => clearTimeout(timer);
+    }
+  }, [progress]);
+
+  const loadedClass = isModelLoaded ? 'loaded' : '';
+
   return (
     <div className="intro-container">
       <Canvas
@@ -52,10 +66,10 @@ export default function Intro() {
         />
       </Canvas>
 
-      <div className="instruction-box">
+      <div className={`instruction-box intro-content ${loadedClass}`}>
         <p className="p-small">Use the mouse to spin the view.</p>
       </div>
-      <div className="intro-box">
+      <div className={`intro-box intro-content ${loadedClass}`}>
         <h1 className="sw-font">STAR WARS</h1>
         <h2>EXPLORER</h2>
         <button onClick={() => navigate('/home')}>MAIN MENU</button>
