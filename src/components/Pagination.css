@@ -29,3 +29,8 @@
   border-color: var(--sw-blue);
   color: var(--sw-blue);
 }
+.numbers-container {
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+}

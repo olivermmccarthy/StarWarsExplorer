@@ -19,6 +19,10 @@ export default function ResourceDetail() {
   const handleBack = () => {
     navigate(`/${resourceType}`);
   };
+  const handleBackToHome = () => {
+    navigate(`/home`);
+  };
+
   // Loading/error/not found
   if (loading) {
     return <h1>LOADING...</h1>;
@@ -44,9 +48,11 @@ export default function ResourceDetail() {
   return (
     <>
       <Header />
-      <div className="detail-container">
+      <div className="button-container">
+        <button onClick={handleBackToHome}>Back to Home</button>
         <button onClick={handleBack}>Back to {resourceType}</button>
-
+      </div>
+      <div className="detail-container">
         <div>
           <h3>{item.name}</h3>
           {/* Render details based on type */}

@@ -1,11 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchResourceList } from '../api/swapi.ts';
 import { RESOURCE_TYPES } from '../types/types.ts';
+import Header from '../components/Header.tsx';
+import Footer from '../components/Footer.tsx';
 
 function HomePage() {
   const navigate = useNavigate();
   return (
     <div>
+      <Header />
       <button onClick={() => navigate('/')}>Back to Intro</button>
       <div className="menu-container">
         {RESOURCE_TYPES.map((resource) => (
@@ -14,6 +17,8 @@ function HomePage() {
           </Link>
         ))}
       </div>
+
+      <Footer />
     </div>
   );
 }

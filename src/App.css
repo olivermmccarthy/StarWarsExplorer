@@ -63,6 +63,15 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@300;400&display=swap');
 
+@font-face {
+  font-family: 'Starjedi';
+  /* src: url('/fonts/Starjedi.ttf') format('ttf'); */
+  src: url('./fonts/Starjedi.ttf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* INTRO */
 #root {
   width: 100%;
@@ -87,8 +96,39 @@
   transform: translate(-50%, 0);
   justify-content: flex-start;
 }
+.instruction-box {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+.sw-font {
+  font-family: 'Starjedi';
+  color: unset;
+  text-shadow: unset;
+  font-size: 2.5rem;
+}
 .p-small {
   font-size: x-small;
+}
+.loader {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem 2rem;
+  border: 2px solid var(--sw-yellow, #ffe81f);
+  border-radius: 8px;
+  color: var(--sw-yellow, #ffe81f);
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(255, 232, 31, 0.7);
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 body {
@@ -155,8 +195,12 @@ button:hover {
   box-shadow: 0 0 15px rgba(255, 232, 31, 0.3);
 }
 
-.header {
-  margin: 80px;
+.header-container {
+  margin: 40px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 .resource-list-container {
   width: 80%;
@@ -170,6 +214,7 @@ button:hover {
 
 /* --- DETAIL VIEW --- */
 .detail-container {
+  width: 40%;
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-left: 4px solid var(--sw-yellow);
@@ -189,6 +234,13 @@ button:hover {
 
 .detail-row:last-child {
   border-bottom: none;
+}
+
+footer {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 /* --- LINKS & TEXT --- */

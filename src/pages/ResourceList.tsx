@@ -4,6 +4,7 @@ import { useFetchResource } from '../hooks/useFetchResource';
 import { getStarWarsId } from '../api/swapi';
 import Pagination from '../components/Pagination';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default function ResourceList() {
   const { resourceType, pageNum } = useParams();
@@ -44,29 +45,32 @@ export default function ResourceList() {
 
   //Success
   return (
-    <div className="resource-list-container">
-      <Header />
-      <div>
-        <button onClick={handleBack}>Back to Home</button>
-        <h1>{resourceType?.toUpperCase()}: </h1>
-        <div className="resource-container">
-          {data.results.map((item) => (
-            <div
-              key={item.url}
-              onClick={() => onViewDetail(getStarWarsId(item.url))}
-              className="resource"
-            >
-              <h3>{item.name}</h3>
-            </div>
-          ))}
+    <>
+      <div className="resource-list-container">
+        <Header />
+        <div>
+          <button onClick={handleBack}>Back to Home</button>
+          <h1>{resourceType?.toUpperCase()}: </h1>
+          <div className="resource-container">
+            {data.results.map((item) => (
+              <div
+                key={item.url}
+                onClick={() => onViewDetail(getStarWarsId(item.url))}
+                className="resource"
+              >
+                <h3>{item.name}</h3>
+              </div>
+            ))}
+          </div>
+          <Pagination
+            resourceType={resourceType!}
+            currentPage={pageNumber}
+            totalItems={data.count}
+            itemsPerPage={10}
+          />
         </div>
-        <Pagination
-          resourceType={resourceType!}
-          currentPage={pageNumber}
-          totalItems={data.count}
-          itemsPerPage={10}
-        />
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }

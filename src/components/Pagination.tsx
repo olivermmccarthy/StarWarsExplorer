@@ -115,7 +115,7 @@ const Pagination: React.FC<PaginationProps> = ({
         aria-disabled={isFirstPage}
         onClick={(e) => isFirstPage && e.preventDefault()}
       >
-        Previous
+        PREVIOUS
       </Link>
 
       {/* Page Numbers */}
@@ -124,11 +124,11 @@ const Pagination: React.FC<PaginationProps> = ({
       {/* Next Button */}
       <Link
         to={getPageLink(currentPage + 1)}
-        className={`${isLastPage ? '' : ''}`}
+        className={`${isLastPage ? 'disabled' : ''}`}
         aria-disabled={isLastPage}
         onClick={(e) => isLastPage && e.preventDefault()}
       >
-        Next
+        NEXT
       </Link>
     </nav>
   );

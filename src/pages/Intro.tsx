@@ -2,18 +2,24 @@ import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment, OrbitControls, Stars, useGLTF } from '@react-three/drei';
 import { useNavigate } from 'react-router-dom';
+import { useProgress, Html } from '@react-three/drei';
 
-// Placeholder model — you can replace this with any GLTF/GLB
-function PlaceholderModel() {
+function Loader() {
+  const { progress } = useProgress(); // Hook to get the loading progress
+
   return (
-    <mesh rotation={[0.4, 0.6, 0]}>
-      <torusKnotGeometry args={[1, 0.3, 128, 16]} />
-      <meshStandardMaterial color="#ffe81f" metalness={0.8} roughness={0.2} />
-    </mesh>
+    <Html center>
+      <div className="loader-container">
+        <h1 style={{ color: 'white' }}>Loading...</h1>
+        <div className="progress-bar-container">
+          <div className="progress-bar" style={{ width: `${progress}%` }} />
+        </div>
+        <p style={{ color: 'white' }}>{progress.toFixed(2)}%</p>
+      </div>
+    </Html>
   );
 }
 
-// Example model loader (uncomment + point to a GLTF file once you have one)
 function StarWarsModel() {
   const { scene } = useGLTF('/models/helmet.glb');
   return <primitive object={scene} scale={10} />;
@@ -33,8 +39,7 @@ export default function Intro() {
         <pointLight position={[5, 5, 5]} intensity={200} />
         <Stars radius={300} depth={60} count={8000} factor={7} fade />
 
-        <Suspense fallback={null}>
-          {/* Replace <PlaceholderModel /> with <StarWarsModel /> when ready */}
+        <Suspense fallback={<Loader />}>
           <StarWarsModel />
         </Suspense>
 
@@ -47,10 +52,13 @@ export default function Intro() {
         />
       </Canvas>
 
+      <div className="instruction-box">
+        <p className="p-small">Use the mouse to spin the view.</p>
+      </div>
       <div className="intro-box">
-        <h1>STAR WARS EXPLORER</h1>
+        <h1 className="sw-font">STAR WARS</h1>
+        <h2>EXPLORER</h2>
         <button onClick={() => navigate('/home')}>MAIN MENU</button>
-        <p className="p-small">(PS: Use the mouse to spin the view...)</p>
       </div>
     </div>
   );
