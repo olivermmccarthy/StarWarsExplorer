@@ -1,0 +1,31 @@
+/* --- PAGINATION --- */
+/* nav {
+  display: flex;
+  justify-content: space-between;
+}
+.numbers-container {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+} */
+
+.pagination {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem 0;
+  gap: 0.5rem;
+}
+
+.pagination a.disabled {
+  border-color: var(--sw-gray);
+  color: var(--sw-gray);
+}
+
+.pagination a {
+  border-color: var(--sw-yellow);
+  color: var(--sw-yellow);
+}
+.pagination a.current {
+  border-color: var(--sw-blue);
+  color: var(--sw-blue);
+}

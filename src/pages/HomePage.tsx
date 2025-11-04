@@ -1,17 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { fetchResourceList } from '../api/swapi.ts';
 import { RESOURCE_TYPES } from '../types/types.ts';
 
-// const results = await fetchResourceList('planets', 1);
-
 function HomePage() {
+  const navigate = useNavigate();
   return (
     <div>
-      {RESOURCE_TYPES.map((resource) => (
-        <Link key={resource} to={`/${resource}`} className="">
-          <button>{resource}</button>
-        </Link>
-      ))}
+      <button onClick={() => navigate('/')}>Back to Intro</button>
+      <div className="menu-container">
+        {RESOURCE_TYPES.map((resource) => (
+          <Link key={resource} to={`/${resource}`} className="">
+            <button className="resource">{resource}</button>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

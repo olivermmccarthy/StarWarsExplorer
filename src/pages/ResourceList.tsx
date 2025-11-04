@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useFetchResource } from '../hooks/useFetchResource';
 import { getStarWarsId } from '../api/swapi';
 import Pagination from '../components/Pagination';
+import Header from '../components/Header';
 
 export default function ResourceList() {
   const { resourceType, pageNum } = useParams();
@@ -25,7 +26,7 @@ export default function ResourceList() {
   };
   // Loading/error/not found
   if (loading) {
-    return <h1>LOADING SPINNER</h1>;
+    return <h1>LOADING...</h1>;
   }
   if (error) {
     // return <ErrorMessage message={`Failed to fetch details for ${resourceType} ID ${id}.`}
@@ -43,24 +44,29 @@ export default function ResourceList() {
 
   //Success
   return (
-    <>
-      <button onClick={handleBack}>Back to Home</button>
-      <h1>{resourceType?.toUpperCase()}: </h1>
-      {data.results.map((item) => (
-        <div
-          key={item.url}
-          onClick={() => onViewDetail(getStarWarsId(item.url))}
-          className="resource"
-        >
-          <h3>{item.name}</h3>
+    <div className="resource-list-container">
+      <Header />
+      <div>
+        <button onClick={handleBack}>Back to Home</button>
+        <h1>{resourceType?.toUpperCase()}: </h1>
+        <div className="resource-container">
+          {data.results.map((item) => (
+            <div
+              key={item.url}
+              onClick={() => onViewDetail(getStarWarsId(item.url))}
+              className="resource"
+            >
+              <h3>{item.name}</h3>
+            </div>
+          ))}
         </div>
-      ))}
-      <Pagination
-        resourceType={resourceType!}
-        currentPage={pageNumber}
-        totalItems={data.count}
-        itemsPerPage={10}
-      />
-    </>
+        <Pagination
+          resourceType={resourceType!}
+          currentPage={pageNumber}
+          totalItems={data.count}
+          itemsPerPage={10}
+        />
+      </div>
+    </div>
   );
 }

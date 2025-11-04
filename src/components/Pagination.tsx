@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './pagination.css';
 
 /**
  * Props for the Pagination component.
@@ -76,7 +77,11 @@ const Pagination: React.FC<PaginationProps> = ({
     for (let i = startPage; i <= endPage; i++) {
       const isCurrent = i === currentPage;
       pageButtons.push(
-        <Link key={i} to={getPageLink(i)} className={` ${isCurrent ? '' : ''}`}>
+        <Link
+          key={i}
+          to={getPageLink(i)}
+          className={`${isCurrent ? 'current' : ''}`}
+        >
           {i}
         </Link>
       );
@@ -102,11 +107,11 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <nav className="">
+    <nav className="pagination">
       {/* Previous Button */}
       <Link
         to={getPageLink(currentPage - 1)}
-        className={` ${isFirstPage ? '' : ''}`}
+        className={` ${isFirstPage ? 'disabled' : ''}`}
         aria-disabled={isFirstPage}
         onClick={(e) => isFirstPage && e.preventDefault()}
       >
@@ -114,7 +119,7 @@ const Pagination: React.FC<PaginationProps> = ({
       </Link>
 
       {/* Page Numbers */}
-      <div className="">{renderPageNumbers()}</div>
+      <div className="numbers-container">{renderPageNumbers()}</div>
 
       {/* Next Button */}
       <Link
