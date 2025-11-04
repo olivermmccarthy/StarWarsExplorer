@@ -72,7 +72,7 @@ export type ResourceType =
   | 'starships'
   | 'vehicles'
   | 'species';
-
+export type ResourceItem = Person | Planet | Starship | Vehicle | Species;
 export const RESOURCE_TYPES: ResourceType[] = [
   'people',
   'planets',

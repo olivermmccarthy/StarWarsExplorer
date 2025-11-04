@@ -14,7 +14,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
-        <Route path="/:resourceType" element={<ResourceList />} />
+        <Route path="/:resourceType" element={<ResourceList />} />{' '}
+        <Route path="/:resourceType/page/:pageNum" element={<ResourceList />} />
         <Route path="/:resourceType/:id" element={<ResourceDetail />} />
       </Routes>
     </Router>

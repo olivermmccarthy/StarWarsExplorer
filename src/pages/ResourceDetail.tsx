@@ -1,15 +1,19 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useFetchResource } from '../hooks/useFetchResource';
+import type { ResourceItem, ResourceType } from '../types/types';
+import DetailContentPerson from '../components/DetailContentPerson';
+import DetailContentPlanet from '../components/DetailContentPlanet';
+import DetailContentStarship from '../components/DetailContentStarship';
+import DetailContentVehicle from '../components/DetailContentVehicle';
+import DetailContentSpecies from '../components/DetailContentSpecies';
 
 export default function ResourceDetail() {
   const { resourceType, id } = useParams();
-  console.log(resourceType);
   const strId = id ? String(id) : undefined;
   const navigate = useNavigate();
 
   const { data, loading, error } = useFetchResource(resourceType, strId);
-  console.log(data);
   //Handlers
   const handleBack = () => {
     navigate(`/${resourceType}`);
@@ -32,13 +36,33 @@ export default function ResourceDetail() {
     );
   }
 
+  // Cast to specific type for rendering
+  const item = data as ResourceItem;
+
   //Success
   return (
     <>
       <button onClick={handleBack}>Back to {resourceType}</button>
 
-      <h1>{data.name}</h1>
-      <p>{data.birth_year}</p>
+      <div>
+        <h3>{item.name}</h3>
+        {/* Render details based on type */}
+        {'height' in item && (item as Person).height && (
+          <DetailContentPerson item={item as Person} />
+        )}
+        {'population' in item && (item as Planet).population && (
+          <DetailContentPlanet item={item as Planet} />
+        )}
+        {'model' in item && (item as Starship).starship_class && (
+          <DetailContentStarship item={item as Starship} />
+        )}
+        {'model' in item && (item as Vehicle).vehicle_class && (
+          <DetailContentVehicle item={item as Vehicle} />
+        )}
+        {'classification' in item && (item as Species).classification && (
+          <DetailContentSpecies item={item as Species} />
+        )}
+      </div>
     </>
   );
 }

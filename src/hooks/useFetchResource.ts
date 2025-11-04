@@ -17,9 +17,6 @@ export function useFetchResource<T>(
     loading: true,
     error: null,
   });
-  console.log('Fetching resource');
-  console.log('RES: ' + resource);
-  console.log('idorpage: ' + idOrPage);
 
   useEffect(() => {
     // Don't fetch if parameters aren't set
@@ -36,11 +33,9 @@ export function useFetchResource<T>(
       try {
         let result: T | ApiListResponse<T>;
         if (typeof idOrPage === 'string') {
-          console.log('Fetching detail');
           // Fetching detail by ID
           result = await fetchResourceDetail<T>(resource, idOrPage);
         } else {
-          console.log('Fetching list');
           // Fetching list by page number
           result = await fetchResourceList<T>(resource, idOrPage as number);
         }

@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useFetchResource } from '../hooks/useFetchResource';
 import { getStarWarsId } from '../api/swapi';
+import Pagination from '../components/Pagination';
 
 export default function ResourceList() {
   const { resourceType, pageNum } = useParams();
@@ -18,7 +19,6 @@ export default function ResourceList() {
     navigate(`/${resourceType}/${id}`);
   };
 
-  console.log(data);
   //Handlers
   const handleBack = () => {
     navigate(`/home`);
@@ -44,7 +44,7 @@ export default function ResourceList() {
   //Success
   return (
     <>
-      <button onClick={handleBack}>BACK</button>
+      <button onClick={handleBack}>Back to Home</button>
       <h1>{resourceType?.toUpperCase()}: </h1>
       {data.results.map((item) => (
         <div
@@ -55,6 +55,12 @@ export default function ResourceList() {
           <h3>{item.name}</h3>
         </div>
       ))}
+      <Pagination
+        resourceType={resourceType!}
+        currentPage={pageNumber}
+        totalItems={data.count}
+        itemsPerPage={10}
+      />
     </>
   );
 }

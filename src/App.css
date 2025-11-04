@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -43,4 +43,164 @@
 
 .resource {
   cursor: pointer;
+} */
+
+/* STAR WARS */
+/* ==============================
+   STAR WARS STYLE THEME
+   ============================== */
+
+:root {
+  --sw-yellow: #ffe81f;
+  --sw-white: #f5f5f5;
+  --sw-gray: #888;
+  --sw-bg: radial-gradient(circle at 50% 20%, #111 0%, #000 100%);
+  --sw-blue: #3e92ff;
+  --sw-red: #ff3e3e;
+  --sw-font-main: 'Orbitron', sans-serif;
+  --sw-font-body: 'Roboto', sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@300;400&display=swap');
+
+body {
+  margin: 0;
+  background: var(--sw-bg);
+  color: var(--sw-white);
+  font-family: var(--sw-font-body);
+  letter-spacing: 0.3px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- HEADERS --- */
+h1,
+h2,
+h3 {
+  font-family: var(--sw-font-main);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--sw-yellow);
+  text-shadow: 0 0 10px rgba(255, 232, 31, 0.6);
+  margin: 0.5rem 0;
+}
+
+/* --- BUTTONS --- */
+button {
+  background: transparent;
+  border: 2px solid var(--sw-yellow);
+  color: var(--sw-yellow);
+  font-family: var(--sw-font-main);
+  text-transform: uppercase;
+  padding: 0.6rem 1.2rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.25s ease;
+}
+
+button:hover {
+  background: var(--sw-yellow);
+  color: #000;
+  box-shadow: 0 0 10px var(--sw-yellow);
+  transform: scale(1.05);
+}
+
+/* --- PAGINATION --- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  gap: 0.5rem;
+}
+
+.pagination button {
+  border-color: var(--sw-gray);
+  color: var(--sw-gray);
+}
+
+.pagination button.active {
+  border-color: var(--sw-yellow);
+  color: var(--sw-yellow);
+}
+
+/* --- RESOURCE LIST --- */
+.resource {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid var(--sw-yellow);
+  padding: 1rem;
+  margin: 0.5rem 0;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 6px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.resource:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px rgba(255, 232, 31, 0.3);
+}
+
+/* --- DETAIL VIEW --- */
+.detail-container {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid var(--sw-yellow);
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  max-width: 700px;
+  box-shadow: 0 0 20px rgba(255, 232, 31, 0.15);
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+/* --- LINKS & TEXT --- */
+a {
+  color: var(--sw-yellow);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--sw-blue);
+}
+
+/* --- SIMPLE FADE-IN ANIMATION --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+/* --- SCROLLBAR (Chrome) --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--sw-yellow);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background-color: #000;
 }
