@@ -1,5 +1,7 @@
 Explore the People, Planets, Starships, Vehicles and Species from the Star Wars Universe.
 
+DEMO: https://star-wars-explorer-orcin.vercel.app/
+
 API used: https://swapi.dev.
 
 Favicon sourced from: https://pngimg.com/image/109506
