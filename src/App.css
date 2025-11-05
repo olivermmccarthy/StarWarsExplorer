@@ -14,7 +14,7 @@
 @font-face {
   font-family: 'Starjedi';
   /* src: url('/fonts/Starjedi.ttf') format('ttf'); */
-  src: url('public/fonts/Starjedi.ttf');
+  src: url('/fonts/Starjedi.ttf');
   font-weight: normal;
   font-style: normal;
   font-display: swap;

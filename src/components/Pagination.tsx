@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './pagination.css';
+import './Pagination.css';
 
 /**
  * Props for the Pagination component.
