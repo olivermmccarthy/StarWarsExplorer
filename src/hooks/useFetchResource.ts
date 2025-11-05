@@ -9,17 +9,16 @@ interface FetchState<T> {
 }
 
 export function useFetchResource<T>(
-  resource: ResourceType,
+  resource: ResourceType | undefined,
   idOrPage?: string | number
 ) {
-  const [state, setState] = useState<FetchState<T | ApiListResponse<T>>>({
+  const [state, setState] = useState<FetchState<T>>({
     data: null,
     loading: true,
     error: null,
   });
 
   useEffect(() => {
-    // Don't fetch if parameters aren't set
     if (!resource || idOrPage === undefined) {
       // Set to not loading so UI doesn't hang
       setState((s) => ({ ...s, loading: false }));
@@ -31,13 +30,13 @@ export function useFetchResource<T>(
 
     const fetchData = async () => {
       try {
-        let result: T | ApiListResponse<T>;
+        let result: T;
         if (typeof idOrPage === 'string') {
-          // Fetching detail by ID
-          result = await fetchResourceDetail<T>(resource, idOrPage);
+          result = (await fetchResourceDetail<T>(resource, idOrPage)) as T;
         } else {
-          // Fetching list by page number
-          result = await fetchResourceList<T>(resource, idOrPage as number);
+          result = (await fetchResourceList<
+            T extends ApiListResponse<infer U> ? U : T
+          >(resource, idOrPage as number)) as T;
         }
         setState({ data: result, loading: false, error: null });
       } catch (err) {
@@ -54,7 +53,7 @@ export function useFetchResource<T>(
     };
 
     fetchData();
-  }, [resource, idOrPage]); // Re-run effect when resource or id/page changes
+  }, [resource, idOrPage]);
 
   return state;
 }

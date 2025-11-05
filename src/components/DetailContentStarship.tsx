@@ -1,6 +1,6 @@
 import React from 'react';
 import DetailRow from './DetailRow.tsx';
-import type { Planet } from '../types/types.ts';
+import type { Starship } from '../types/types.ts';
 
 const DetailContentStarship: React.FC<{ item: Starship }> = ({ item }) => (
   <>

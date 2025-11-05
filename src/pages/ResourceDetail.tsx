@@ -1,7 +1,14 @@
-import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useFetchResource } from '../hooks/useFetchResource';
-import type { ResourceItem, ResourceType } from '../types/types';
+import type {
+  Person,
+  Planet,
+  ResourceItem,
+  ResourceType,
+  Species,
+  Starship,
+  Vehicle,
+} from '../types/types';
 import DetailContentPerson from '../components/DetailContentPerson';
 import DetailContentPlanet from '../components/DetailContentPlanet';
 import DetailContentStarship from '../components/DetailContentStarship';
@@ -14,7 +21,10 @@ export default function ResourceDetail() {
   const strId = id ? String(id) : undefined;
   const navigate = useNavigate();
 
-  const { data, loading, error } = useFetchResource(resourceType, strId);
+  const { data, loading, error } = useFetchResource(
+    resourceType as ResourceType,
+    strId
+  );
   //Handlers
   const handleBack = () => {
     navigate(`/${resourceType}`);

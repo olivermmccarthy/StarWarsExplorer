@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { fetchResourceList } from '../api/swapi.ts';
 import { RESOURCE_TYPES } from '../types/types.ts';
 import Header from '../components/Header.tsx';
 import Footer from '../components/Footer.tsx';

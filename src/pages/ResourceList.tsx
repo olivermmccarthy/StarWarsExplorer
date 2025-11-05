@@ -1,20 +1,30 @@
-import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useFetchResource } from '../hooks/useFetchResource';
 import { getStarWarsId } from '../api/swapi';
 import Pagination from '../components/Pagination';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import type { ApiListResponse, ResourceType } from '../types/types'; //
+
+type ResourceListItem = {
+  name: string;
+  url: string;
+};
 
 export default function ResourceList() {
-  const { resourceType, pageNum } = useParams();
+  const { resourceType, pageNum } = useParams<'resourceType' | 'pageNum'>(); // Add generic to useParams
   const navigate = useNavigate();
 
   const pageNumber = pageNum ? Number(pageNum) : 1;
 
-  const { data, loading, error } = useFetchResource(resourceType, pageNumber);
+  const resource = resourceType as ResourceType | undefined;
 
-  const onViewDetail = (url) => {
+  const { data, loading, error } = useFetchResource<
+    ApiListResponse<ResourceListItem>
+  >(resource, pageNumber);
+
+  // Added type for 'url'
+  const onViewDetail = (url: string) => {
     //Get id
     const id = getStarWarsId(url);
     //Load detail
@@ -30,20 +40,19 @@ export default function ResourceList() {
     return <h1>LOADING...</h1>;
   }
   if (error) {
-    // return <ErrorMessage message={`Failed to fetch details for ${resourceType} ID ${id}.`}
     return <h1>Error</h1>;
   }
-  if (!data) {
+
+  if (!data || !('results' in data)) {
     return (
       <>
         <h1>The requested data does not exist.</h1>
-        {/* <Button>Go back</Button> */}
-        <button onClick={handleBack}></button>
+        <button onClick={handleBack}>Go back</button>
       </>
     );
   }
 
-  //Success
+  // Success
   return (
     <>
       <div className="resource-list-container">
@@ -55,10 +64,10 @@ export default function ResourceList() {
             {data.results.map((item) => (
               <div
                 key={item.url}
-                onClick={() => onViewDetail(getStarWarsId(item.url))}
+                onClick={() => onViewDetail(item.url)}
                 className="resource"
               >
-                <h3>{item.name}</h3>
+                <h3>{item.name}  </h3>
               </div>
             ))}
           </div>
